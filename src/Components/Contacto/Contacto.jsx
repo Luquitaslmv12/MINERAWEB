@@ -46,15 +46,17 @@ function Contacto() {
 
     emailjs
       .sendForm(
-        "service_gd4w36e",    // Reemplaza con tu Service ID
-        "template_k8ve6d8",   // Reemplaza con tu Template ID
+        "service_gd4w36e", // Reemplaza con tu Service ID
+        "template_k8ve6d8", // Reemplaza con tu Template ID
         formRef.current,
-        "onJd4b7yydxzDcOZ4"   // Reemplaza con tu Public Key
+        "onJd4b7yydxzDcOZ4" // Reemplaza con tu Public Key
       )
       .then(
         () => {
           setIsSuccess(true);
-          setMessage("¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.");
+          setMessage(
+            "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto."
+          );
           setShowMessage(true);
           setNombre("");
           setEmail("");
@@ -72,27 +74,23 @@ function Contacto() {
   };
 
   // Lógica para el botón de WhatsApp
-  const phone = "5491123456789";
+  const phone = "5493447432091";
   const text = "Hola! Quiero más información";
   const isMobile = /iPhone|Android|iPad|iPod/i.test(navigator.userAgent);
   const whatsappUrl = isMobile
-    ? `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`
-    : `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
+    ? `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+        text
+      )}`
+    : `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(
+        text
+      )}`;
 
   return (
     <section className="relative py-24 px-4 text-white" id="contacto">
-      <div className="absolute inset-0">
-        <img
-          src="/images/contacto-bg.jpg"
-          alt="Fondo contacto"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-cyan-800/80 backdrop-blur-md" />
-      </div>
-
+      {/* Se eliminó la imagen de fondo y el gradiente */}
       <div className="relative z-10 container mx-auto">
         <h2
-          className="text-center text-5xl font-extrabold mb-12 tracking-tight"
+          className="text-center text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 mb-16 tracking-tight"
           data-aos="fade-up"
         >
           Contacto
@@ -100,7 +98,7 @@ function Contacto() {
 
         <div className="flex justify-center">
           <div
-            className="w-full md:w-2/3 lg:w-1/2 bg-white/10 backdrop-blur-xl p-10 rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-300"
+            className="w-full md:w-2/3 lg:w-1/2 bg-white/10 backdrop-blur-xl p-10 rounded-3xl shadow-xl hover:shadow-cyan-400/50 transition-all duration-500"
             data-aos="zoom-in"
           >
             <form ref={formRef} className="space-y-6">
@@ -119,7 +117,7 @@ function Contacto() {
                   placeholder="Tu nombre"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
                 />
               </div>
 
@@ -138,7 +136,7 @@ function Contacto() {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
                 />
               </div>
 
@@ -157,13 +155,15 @@ function Contacto() {
                   placeholder="Escribí tu consulta"
                   value={mensajeTexto}
                   onChange={(e) => setMensajeTexto(e.target.value)}
-                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="mt-2 w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
                 />
               </div>
 
               <button
                 type="submit"
-                className={`w-full py-3 px-4 bg-cyan-500 hover:bg-cyan-600 text-white text-lg font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white ${isClicked ? 'animate-pulse-on-click' : ''}`}
+                className={`w-full py-3 px-4 bg-cyan-500 hover:bg-cyan-600 text-white text-lg font-semibold rounded-lg transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-white ${
+                  isClicked ? "animate-pulse-on-click" : ""
+                }`}
                 onClick={handleClick}
                 aria-label="Enviar mensaje"
               >
@@ -173,11 +173,19 @@ function Contacto() {
 
             {showMessage && (
               <div
-                className={`mt-6 p-4 text-center rounded-lg transition-all duration-500 ease-in-out transform ${isSuccess ? 'bg-green-500' : isSuccess === false ? 'bg-red-500' : 'bg-yellow-500'} text-white font-semibold`}
+                className={`mt-6 p-4 text-center rounded-lg transition-all duration-500 ease-in-out transform ${
+                  isSuccess
+                    ? "bg-green-500"
+                    : isSuccess === false
+                    ? "bg-red-500"
+                    : "bg-yellow-500"
+                } text-white font-semibold`}
                 data-aos="fade-up"
               >
                 {isSuccess && <CheckCircle className="w-6 h-6 inline mr-2" />}
-                {isSuccess === false && <XCircle className="w-6 h-6 inline mr-2" />}
+                {isSuccess === false && (
+                  <XCircle className="w-6 h-6 inline mr-2" />
+                )}
                 {isSuccess === null && <Info className="w-6 h-6 inline mr-2" />}
                 {message}
               </div>
@@ -190,7 +198,7 @@ function Contacto() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-500"
         aria-label="WhatsApp"
       >
         <svg

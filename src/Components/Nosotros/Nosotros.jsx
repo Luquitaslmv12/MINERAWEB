@@ -3,11 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable";
 
 function Nosotros() {
-  const images = [
-    "/Flux_Dev_I_need_a_modern_sleek_logo_for_a_company_featuring_an_0-removebg-preview.png",
-    "/logo-rojo.png",
-    "/vecteezy_ai-generated-five-commercial-trucks-are-lined-up-at-sunset_35826431.png",
-  ];
+  const images = ["/1.jpeg", "/2.jpeg", "/3.jpeg", "/4.jpeg"];
 
   const [centerIndex, setCenterIndex] = useState(1);
   const intervalRef = useRef(null);
@@ -64,41 +60,38 @@ function Nosotros() {
   });
 
   return (
-    <section
-      className="bg-gradient-to-br from-white via-blue-50 to-cyan-100 py-24 px-4"
-      id="carrusel"
-      onMouseEnter={stopAutoSlide}
-      onMouseLeave={startAutoSlide}
-    >
+    <section className="py-24 px-4" id="carrusel">
       <div className="container mx-auto">
-        <h2 className="text-center text-3xl sm:text-5xl font-extrabold text-gray-800 mb-16 tracking-tight">
-          Galería de Imágenes
+        <h2 className="text-center text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 mb-16 tracking-tight">
+          Galería
         </h2>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {/* Botón Anterior */}
           <button
             onClick={retroceder}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white p-3 rounded-full shadow-lg transition"
+            className="bg-cyan-600 hover:bg-cyan-500 text-white p-3 rounded-full shadow-lg transition"
             aria-label="Anterior"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Carrusel con efecto hover */}
+          {/* Carrusel */}
           <div
             {...swipeHandlers}
-            className="group flex overflow-hidden gap-6 transition-all duration-1000 ease-in-out"
+            className="group flex justify-center overflow-hidden gap-6 transition-all duration-1000 ease-in-out w-full mx-auto"
           >
             {getVisibleImages().map((img, idx) => (
               <div
                 key={idx}
-                className={`w-full max-w-[350px] sm:w-90 h-64 sm:h-96 bg-center bg-cover rounded-2xl shadow-xl transition-all duration-700 ease-in-out transform ${
+                className={`w-full sm:max-w-[350px] h-64 sm:h-96 bg-center bg-cover rounded-2xl shadow-xl transition-all duration-700 ease-in-out transform ${
                   idx === 1
                     ? "scale-100 opacity-100 z-10 group-hover:scale-105 group-hover:brightness-110 group-hover:shadow-2xl"
-                    : "scale-85 opacity-70"
-                }`}
+                    : "scale-85 opacity-60"
+                } flex-shrink-0`}
                 style={{ backgroundImage: `url(${img})` }}
+                onMouseEnter={stopAutoSlide} // Detener el carrusel al pasar el ratón sobre la imagen
+                onMouseLeave={startAutoSlide} // Reanudar el carrusel cuando se sale de la imagen
               />
             ))}
           </div>
@@ -106,14 +99,14 @@ function Nosotros() {
           {/* Botón Siguiente */}
           <button
             onClick={avanzar}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white p-3 rounded-full shadow-lg transition"
+            className="bg-cyan-600 hover:bg-cyan-500 text-white p-3 rounded-full shadow-lg transition"
             aria-label="Siguiente"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
 
-        {/* Indicadores clicables */}
+        {/* Indicadores */}
         <div className="flex justify-center mt-6 gap-2">
           {images.map((_, idx) => (
             <button
@@ -121,8 +114,8 @@ function Nosotros() {
               onClick={() => irAIndice(idx)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 idx === centerIndex
-                  ? "bg-cyan-600 scale-125"
-                  : "bg-cyan-300 opacity-50"
+                  ? "bg-cyan-400 scale-125"
+                  : "bg-cyan-200 opacity-50"
               }`}
               aria-label={`Ir a imagen ${idx + 1}`}
             />
