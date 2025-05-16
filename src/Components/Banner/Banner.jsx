@@ -10,10 +10,10 @@ const Banner = () => (
       backgroundPosition: "center 45%",
     }}
   >
-    {/* Capa de superposición más oscura */}
+   
     <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-cyan-900/60"></div>
 
-    {/* Contenido animado */}
+
     <div className="relative z-10 text-center text-white max-w-6xl px-4">
       <motion.h1
         className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight"
@@ -45,7 +45,7 @@ const Banner = () => (
       </motion.a>
     </div>
 
-    {/* Ícono decorativo */}
+
     <div
       className="absolute bottom-8 right-8 animate-spin-slow text-cyan-400 opacity-30"
       aria-hidden="true"

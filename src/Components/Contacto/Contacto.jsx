@@ -46,7 +46,7 @@ function Contacto() {
 
     emailjs
       .sendForm(
-        "service_gd4w36e", // Reemplaza con tu Service ID
+        "service_yf8ercb", // Reemplaza con tu Service ID
         "template_k8ve6d8", // Reemplaza con tu Template ID
         formRef.current,
         "onJd4b7yydxzDcOZ4" // Reemplaza con tu Public Key
@@ -74,8 +74,8 @@ function Contacto() {
   };
 
   // Lógica para el botón de WhatsApp
-  const phone = "5493447432091";
-  const text = "Hola! Quiero más información";
+  const phone = "5493447448045";
+  const text = "Hola!";
   const isMobile = /iPhone|Android|iPad|iPod/i.test(navigator.userAgent);
   const whatsappUrl = isMobile
     ? `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(

@@ -17,7 +17,7 @@ function Footer() {
               </span>
             </h5>
             <p className="text-lg">Email: mineradellitoral@gmail.com</p>
-            <p className="text-lg">Tel: +54 9 3447432020</p>
+            <p className="text-lg">Tel: +54 9 3447448045</p>
             <p className="text-lg">Colón, Entre Ríos</p>
           </div>
 
