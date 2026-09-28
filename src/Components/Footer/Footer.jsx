@@ -1,91 +1,143 @@
-import React from "react";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ArrowUp } from "lucide-react";
+import { brand, contact, navLinks, services, socials } from "../../data/site";
 
-function Footer() {
+const SOCIAL_ICONS = { facebook: Facebook, instagram: Instagram, linkedin: Linkedin };
+
+export default function Footer() {
+  const scrollToTop = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  };
+
   return (
-    <footer
-      className="bg-gray-900 text-gray-200 dark:bg-black dark:text-gray-300 py-10"
-      role="contentinfo"
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Contacto */}
-          <div className="text-center md:text-left w-full md:w-1/3">
-            <h5 className="text-2xl font-bold mb-4">
-              <span className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent hover:bg-opacity-80 transition">
-                Contacto
-              </span>
-            </h5>
-            <p className="text-lg">Email: mineradellitoral@gmail.com</p>
-            <p className="text-lg">Tel: +54 9 3447448045</p>
-            <p className="text-lg">Colón, Entre Ríos</p>
-          </div>
-
-          {/* Mapa */}
-          <div className="w-full md:w-1/3 mt-8 md:mt-0 text-center">
-            <h5 className="text-2xl font-bold mb-4">
-              <span className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent hover:bg-opacity-80 transition">
-                Nuestra Ubicación
-              </span>
-            </h5>
-            <div className="w-full max-w-sm mx-auto aspect-w-16 aspect-h-9">
-              <iframe
-                title="Ubicación en Google Maps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3375.0913608185388!2d-58.14402032362278!3d-32.228706435991405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95ae331e5a8b6f17%3A0x778d4e62934a2e2!2sVieytes%20237%2C%20E3285%20Col%C3%B3n%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses-419!2sar!4v1746285017877!5m2!1ses-419!2sar"
-                allowFullScreen
+    <footer className="relative border-t border-white/10 bg-steel-950" role="contentinfo">
+      <div className="container-x py-14 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1.2fr] lg:gap-12">
+          {/* Marca */}
+          <div>
+            <div className="flex items-center gap-3">
+              <img
+                src={brand.logo}
+                alt=""
+                width="500"
+                height="500"
                 loading="lazy"
-                className="w-full h-full rounded-lg shadow-md border-0"
+                decoding="async"
+                className="h-12 w-12 object-contain"
               />
+              <div className="leading-none">
+                <p className="font-display text-base font-extrabold tracking-[0.18em] text-white uppercase">
+                  Minera
+                </p>
+                <p className="text-[0.65rem] font-semibold tracking-[0.3em] text-gold-300 uppercase">
+                  del Litoral
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-5 max-w-sm text-sm/relaxed text-steel-400">{brand.description}</p>
+
+            <div className="mt-6 flex items-center gap-4">
+              {socials.map(({ label, href, network }) => {
+                const Icon = SOCIAL_ICONS[network];
+
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-steel-300 transition duration-300 hover:-translate-y-0.5 hover:border-gold-400/40 hover:text-gold-300"
+                  >
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
-          {/* Redes Sociales */}
-          <div className="text-center md:text-right w-full md:w-1/3">
-            <h5 className="text-2xl font-bold mb-4">
-              <span className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent hover:bg-opacity-80 transition">
-                Seguinos
-              </span>
-            </h5>
-            <div className="flex justify-center md:justify-end space-x-6">
-              <a
-                href="https://www.facebook.com/mineradellitoral"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="text-gray-300 hover:text-blue-500 transition duration-300 ease-in-out transform hover:scale-110"
-              >
-                <Facebook size={26} />
-              </a>
-              <a
-                href="https://www.instagram.com/mineradellitoral"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-gray-300 hover:text-pink-500 transition duration-300 ease-in-out transform hover:scale-110"
-              >
-                <Instagram size={26} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/norma-garnier-8111a139/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-gray-300 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-110"
-              >
-                <Linkedin size={26} />
-              </a>
-            </div>
+          {/* Servicios */}
+          <nav aria-label="Servicios">
+            <h2 className="font-display text-xs font-bold tracking-[0.22em] text-white uppercase">Servicios</h2>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {services.map((service) => (
+                <li key={service.title}>
+                  <a href="#servicios" className="text-sm text-steel-400 transition hover:text-gold-300">
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Contacto y navegación */}
+          <div>
+            <h2 className="font-display text-xs font-bold tracking-[0.22em] text-white uppercase">Contacto</h2>
+            <ul className="mt-5 flex flex-col gap-3 text-sm text-steel-400">
+              <li>
+                <a
+                  href={`tel:+${contact.phoneRaw}`}
+                  className="flex items-start gap-3 transition hover:text-gold-300"
+                >
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                  {contact.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="flex items-start gap-3 transition hover:text-gold-300"
+                >
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                  {contact.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={contact.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 transition hover:text-gold-300"
+                >
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                  {contact.address}
+                </a>
+              </li>
+            </ul>
+
+            <nav aria-label="Navegación del sitio" className="mt-7">
+              <h3 className="font-display text-xs font-bold tracking-[0.22em] text-white uppercase">
+                Navegación
+              </h3>
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-steel-400">
+                {navLinks.map((link) => (
+                  <li key={link.id}>
+                    <a href={`#${link.id}`} className="transition hover:text-gold-300">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
 
-        {/* Línea divisoria */}
-        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-base text-gray-400">
-          © {new Date().getFullYear()} Transporte Minera del Litoral S.R.L.
-          Todos los derechos reservados.
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-center text-xs text-steel-500 sm:text-left">
+            © {new Date().getFullYear()} {brand.legal}. Todos los derechos reservados.
+          </p>
+
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-steel-300 transition hover:border-gold-400/40 hover:text-white"
+          >
+            Volver arriba
+            <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
+          </button>
         </div>
       </div>
     </footer>
   );
 }
-
-export default Footer;

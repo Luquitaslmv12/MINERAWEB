@@ -1,59 +1,235 @@
- :root {
-  background-image: url('/web-minera/public/logo-rojo.png'); /* Ruta desde la carpeta public */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  margin: 0;
-  height: 100%;
+@import "tailwindcss";
+
+/* ==========================================================================
+   MINERA DEL LITORAL — Design tokens (Tailwind CSS v4)
+   Paleta industrial: acero nocturno + dorado de maquinaria + fuego del logo.
+   ========================================================================== */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Azul acero */
+  --color-steel-50: #f5f7fb;
+  --color-steel-100: #e8edf5;
+  --color-steel-200: #cbd6e6;
+  --color-steel-300: #a3b4cc;
+  --color-steel-400: #738aab;
+  --color-steel-500: #526d92;
+  --color-steel-600: #3d547a;
+  --color-steel-700: #2c3f5f;
+  --color-steel-800: #1b2942;
+  --color-steel-900: #101b2f;
+  --color-steel-950: #070d19;
+
+  /* Dorado de maquinaria */
+  --color-gold-200: #fde9a9;
+  --color-gold-300: #fbd45c;
+  --color-gold-400: #f7bb1f;
+  --color-gold-500: #d99a05;
+  --color-gold-600: #a97404;
+
+  /* Fuego (identidad del logo) */
+  --color-ember-400: #ff6b5b;
+  --color-ember-500: #ef4436;
+  --color-ember-600: #c9301f;
+
+  --radius-4xl: 2rem;
+
+  --shadow-card: 0 30px 60px -35px rgb(2 6 23 / 0.95);
+  --shadow-glow: 0 0 0 1px rgb(247 187 31 / 0.4), 0 22px 45px -22px rgb(247 187 31 / 0.55);
+  --shadow-glow-ember: 0 0 0 1px rgb(255 107 91 / 0.4), 0 22px 45px -22px rgb(239 68 54 / 0.55);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 22s linear infinite;
+  --animate-bounce-soft: bounce-soft 2.2s ease-in-out infinite;
+  --animate-marquee: marquee 34s linear infinite;
 }
 
- @import "tailwindcss";
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
 
 @keyframes spin-slow {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+@keyframes bounce-soft {
+  0%,
   100% {
-    transform: scale(1);
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
   }
 }
 
-.animate-pulse-on-click {
-  animation: pulse 0.5s ease-out;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa la altura del header fijo al navegar por anclas */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-steel-950 font-sans text-steel-200 antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-white;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-gold-400 text-steel-950;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold-400;
+  }
+
+  /* Scrollbar sutil (solo navegadores WebKit) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-steel-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-steel-700);
+    border-radius: 9999px;
+    border: 2px solid var(--color-steel-950);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-steel-600);
+  }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 10s linear infinite;
+/* ==========================================================================
+   Utilidades de proyecto
+   ========================================================================== */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
 }
 
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(148 163 184 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 184 / 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
 
+@utility bg-radial-gold {
+  background-image: radial-gradient(60% 60% at 50% 0%, rgb(247 187 31 / 0.16) 0%, transparent 70%);
+}
 
- html {
-  scroll-behavior: smooth;
+@utility bg-radial-ember {
+  background-image: radial-gradient(55% 55% at 85% 20%, rgb(239 68 54 / 0.18) 0%, transparent 70%);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, var(--color-gold-300) 0%, var(--color-gold-400) 45%, var(--color-ember-400) 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility card-surface {
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background-color: rgb(255 255 255 / 0.04);
+  background-image: linear-gradient(160deg, rgb(255 255 255 / 0.06) 0%, rgb(255 255 255 / 0) 55%);
+  backdrop-filter: blur(14px);
+}
+
+/* Componentes reutilizables */
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-outline,
+  .btn-ghost,
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 ease-out;
+  }
+
+  .btn-primary {
+    @apply bg-gold-400 text-steel-950 shadow-lg shadow-gold-500/20 hover:-translate-y-0.5 hover:bg-gold-300 hover:shadow-glow;
+  }
+
+  .btn-outline {
+    @apply border border-white/20 text-white hover:-translate-y-0.5 hover:border-gold-300/60 hover:bg-white/10;
+  }
+
+  .btn-ghost {
+    @apply text-steel-200 hover:bg-white/5 hover:text-white;
+  }
+
+  .btn-whatsapp {
+    @apply bg-[#25d366] text-[#052e16] shadow-lg shadow-[#25d366]/20 hover:-translate-y-0.5 hover:bg-[#1fbe5b];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-4 py-1.5 text-[0.68rem] font-semibold tracking-[0.2em] text-gold-300 uppercase;
+  }
+
+  .prose-lead {
+    @apply text-base/relaxed text-steel-300 sm:text-lg/relaxed;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/12 bg-white/5 px-4 py-3 text-base text-white placeholder-steel-400 transition duration-200 focus:border-gold-400/70 focus:bg-white/10 focus:outline-none;
+  }
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
